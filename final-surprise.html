@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Final Surprise 💘</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ===== FINAL SECTION LAYOUT ===== */
+    .final-wrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items:center;
+    }
+
+    .final-photo{
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(255,255,255,.20);
+      border:1px solid rgba(255,255,255,.30);
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      min-height: 360px;
+    }
+
+    .final-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .final-title{
+      margin:0 0 10px 0;
+      font-size: clamp(26px,2.5vw,36px);
+    }
+
+    .final-line{
+      margin:10px 0;
+      line-height:1.6;
+      color: rgba(42,14,22,.85);
+    }
+
+    .final-question{
+      margin-top:16px;
+      font-size: clamp(28px,2.8vw,42px);
+    }
+
+    .final-choices{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .fx-layer{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:9999;
+      overflow:hidden;
+    }
+
+    .fx-heart{
+      position:absolute;
+      top:-10vh;
+      font-size:18px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(120vh) rotate(360deg);
+        opacity:.95;
+      }
+    }
+
+    .fx-dot{
+      position:absolute;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      animation: pop .9s ease-out forwards;
+    }
+
+    @keyframes pop{
+      0%{opacity:1; transform:scale(1);}
+      100%{opacity:0; transform:scale(1.5);}
+    }
+
+    @media (max-width:900px){
+      .final-wrap{ grid-template-columns:1fr; }
+      .final-photo{ min-height:260px; }
+    }
+  </style>
+</head>
+
+<body class="val-bg-design">
+  <div class="hearts"></div>
+
+  <!-- SAME HEADER STYLE -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink active">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="index.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top:30px;">
+    <section class="card">
+
+      <div class="final-wrap">
+
+        <!-- LEFT IMAGE -->
+        <div class="final-photo">
+          <!-- CHANGE THIS IMAGE -->
+          <img src="assets/images/p2.JPG" alt="Us 💘">
+        </div>
+
+        <!-- RIGHT TEXT -->
+        <div>
+          <h2 class="final-title">Ammu… 💗</h2>
+
+          <p class="final-line" id="line1"></p>
+          <p class="final-line" id="line2"></p>
+          <p class="final-line" id="line3"></p>
+
+          <button class="btn" id="nextBtn">Continue</button>
+
+          <div id="askBlock" style="display:none;">
+            <h1 class="final-question">Will you be my Forever Valentine? 💘</h1>
+
+            <div class="final-choices">
+              <button class="btn" id="yesBtn">YES 💖</button>
+              <button class="btn" id="noBtn">No 😌</button>
+            </div>
+
+            <p id="finalMsg" style="margin-top:12px;"></p>
+
+            <button class="btn" id="boomBtn" style="margin-top:14px;">
+              💞 Celebrate Our Valentine Closing
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fx-layer" id="fxLayer"></div>
+
+    </section>
+  </main>
+
+  <!-- SAME FOOTER STYLE -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script>
+    const lines = [
+      "Ammu, you are the best thing that ever happened to me. 💖",
+      "I’m not perfect. But I promise I’m always choosing you, every day.",
+      "So today… I want to ask you something."
+    ];
+
+    let i = 0;
+    const l1 = document.getElementById("line1");
+    const l2 = document.getElementById("line2");
+    const l3 = document.getElementById("line3");
+    const nextBtn = document.getElementById("nextBtn");
+    const askBlock = document.getElementById("askBlock");
+
+    function showLines(){
+      l1.textContent = i>=1 ? lines[0] : "";
+      l2.textContent = i>=2 ? lines[1] : "";
+      l3.textContent = i>=3 ? lines[2] : "";
+      if(i>=3){
+        nextBtn.style.display="none";
+        askBlock.style.display="block";
+      }
+    }
+
+    nextBtn.onclick=()=>{ i++; showLines(); };
+    i=1; showLines();
+
+    const yesBtn=document.getElementById("yesBtn");
+    const noBtn=document.getElementById("noBtn");
+    const finalMsg=document.getElementById("finalMsg");
+    const boomBtn=document.getElementById("boomBtn");
+    const fxLayer=document.getElementById("fxLayer");
+
+    noBtn.onmouseenter=()=>{
+      const dx=(Math.random()*150-75);
+      const dy=(Math.random()*80-40);
+      noBtn.style.transform=`translate(${dx}px,${dy}px)`;
+    };
+
+    yesBtn.onclick=()=>{
+      finalMsg.textContent="You just made me the happiest man alive. 😭❤️";
+    };
+
+    let celebrationInterval = null;
+let fireworksInterval = null;
+let celebrating = false;
+
+function heartRain(){
+  const icons=["💖","💘","💗","💞","✨"];
+  for(let i=0;i<25;i++){
+    const el=document.createElement("div");
+    el.className="fx-heart";
+    el.textContent=icons[Math.floor(Math.random()*icons.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.fontSize=(14+Math.random()*20)+"px";
+    el.style.animationDuration=(3+Math.random()*2)+"s";
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(),5000);
+  }
+}
+
+function fireworks(){
+  for(let i=0;i<35;i++){
+    const dot=document.createElement("div");
+    dot.className="fx-dot";
+    dot.style.left=Math.random()*100+"vw";
+    dot.style.top=Math.random()*100+"vh";
+    dot.style.background=["#fff","#ff2d55","#ffd1dc","#ffe066","#ff99cc"][Math.floor(Math.random()*5)];
+    fxLayer.appendChild(dot);
+    setTimeout(()=>dot.remove(),900);
+  }
+}
+
+boomBtn.onclick=()=>{
+
+  if(!celebrating){
+    celebrating = true;
+
+    finalMsg.textContent="Now it’s official… you’re my forever Valentine. 💘";
+    boomBtn.textContent="💞 Stop Celebration";
+
+    // Continuous heart rain every 
+    celebrationInterval = setInterval(heartRain, 300);
+
+    // Continuous fireworks every
+    fireworksInterval = setInterval(fireworks, 300);
+
+  } else {
+    // Stop celebration
+    celebrating = false;
+
+    clearInterval(celebrationInterval);
+    clearInterval(fireworksInterval);
+
+    boomBtn.textContent="💞 Celebrate Again";
+  }
+};
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Promises 💍</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design promises-page">
+  <div class="hearts"></div>
+
+  <!-- Same topbar as index -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink active">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="dashboard.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="promises-main">
+    <section class="card promises-card">
+      <div class="promises-head">
+        <div>
+          <h2 class="promises-title">Promises, Ammu 💍</h2>
+          <p class="promises-sub">Hover / tap a card 💗 (front = promise, back = memory photo)</p>
+        </div>
+        <div class="pill">✨ Hover to flip</div>
+      </div>
+
+      <div class="promise-grid">
+
+  <!-- Card 1 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <!-- FRONT -->
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 1</span>
+        <h3>I’ll be honest and loyal no matter what</h3>
+        <p>I will be transparent so you know I'm real and true to you.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+       <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/04.jpg" alt="Memory 1">
+</div>
+
+    </div>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 2</span>
+        <h3>I’ll choose us over ego</h3>
+        <p>Even in arguments, I’ll protect “us”.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+      <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/22.jpg" alt="Memory 1">
+</div>
+
+
+    </div>
+  </article>
+
+  <!-- Card 3 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 3</span>
+        <h3>I’ll learn how to be more responsible</h3>
+        <p>I’ll take ownership of my actions and be accountable for them.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+       <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/27.jpg" alt="Memory 1">
+</div>
+
+    </div>
+  </article>
+
+  <!-- Card 4 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 4</span>
+        <h3>I’ll achieve my target and study well</h3>
+        <p>I’ll be disciplined and focused on my goals so I can be a better partner for you.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+       <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/14.jpg" alt="Memory 1">
+</div>
+
+    </div>
+  </article>
+
+    <!-- Card 5 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 5</span>
+        <h3>I’ll be a better life and business partner</h3>
+        <p>I’ll be more responsible and supportive in our relationship and future.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+       <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/31.jpg" alt="Memory 1">
+</div>
+
+    </div>
+  </article>
+    <!-- Card 6 -->
+  <article class="promise-card" data-promise>
+    <div class="promise-inner">
+
+      <div class="promise-face promise-front">
+        <span class="promise-tag">Promise 6</span>
+        <h3>I’ll prioritize you in all decisions</h3>
+        <p>I’ll make sure you are always at the center of my thoughts and actions.</p>
+        <div class="promise-hint">Hover ✨</div>
+      </div>
+
+       <!-- BACK (IMAGE ONLY) -->
+<div class="promise-face promise-back">
+  <img class="promise-back-img" src="assets/images/gallery/30.jpg" alt="Memory 1">
+</div>
+
+    </div>
+  </article>
+
+</div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initHearts, initPageFade } from "./js/main.js";
+    initPageFade(); initHearts();
+
+    // Tap-to-flip for mobile + click
+    document.querySelectorAll("[data-promised]").forEach(card=>{
+      card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
+    });
+  </script>
+</body>
+</html>

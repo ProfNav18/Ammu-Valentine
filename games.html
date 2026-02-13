@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Games — Crossword 🧩</title>
+
+  <!-- keep your global styles if you want -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ===== Page layout ===== */
+    body.crossword-page{
+      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .crossword-main{
+      flex: 1;
+      display:grid;
+      place-items:center;
+      padding: 18px 16px 26px;
+    }
+
+    .crossword-card{
+      width: min(1100px, 96vw);
+      padding: 22px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    .cw-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+
+    .cw-title{
+      margin:0 0 6px 0;
+      font-size: clamp(26px, 2.6vw, 38px);
+    }
+    .cw-sub{
+      margin:0;
+      color: rgba(42,14,22,.78);
+      line-height:1.5;
+      max-width: 70ch;
+    }
+
+    .cw-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* ===== Top panels (Clues) ===== */
+    .cw-panels{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items:start;
+    }
+
+    .cw-panel{
+      border-radius: 18px;
+      background: rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.34);
+      box-shadow: 0 14px 45px rgba(0,0,0,.12);
+      padding: 14px;
+      overflow:hidden;
+    }
+
+    .cw-panel h3{
+      margin: 0 0 10px 0;
+      font-size: 16px;
+    }
+
+    .cw-clues{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+    }
+
+    .cw-clues ul{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(42,14,22,.80);
+    }
+    .cw-clues li{
+      margin: 6px 0;
+      line-height:1.4;
+    }
+
+    /* ===== Bottom board ===== */
+    .cw-stage{
+      border-radius: 22px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.30);
+      box-shadow: 0 22px 70px rgba(0,0,0,.18);
+      padding: 16px;
+      overflow:hidden;
+    }
+
+    .cw-grid{
+      width: 100%;
+      display:grid;
+      gap: 6px;
+      justify-content:center;
+      align-content:center;
+      padding: 8px;
+      user-select:none;
+    }
+
+    .cw-cell{
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      position: relative;
+      display:grid;
+      place-items:center;
+      box-shadow: 0 12px 26px rgba(0,0,0,.10);
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(255,255,255,.82);
+    }
+
+    .cw-cell.block{
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: none;
+    }
+
+    .cw-cell input{
+      width: 100%;
+      height: 100%;
+      border:0;
+      outline:0;
+      background: transparent;
+      text-align:center;
+      font-size: 18px;
+      font-weight: 900;
+      color: rgba(42,14,22,.95);
+      text-transform: uppercase;
+      caret-color: rgba(255,45,85,.8);
+    }
+
+    .cw-num{
+      position:absolute;
+      left:6px;
+      top:4px;
+      font-size: 10px;
+      font-weight: 900;
+      color: rgba(42,14,22,.55);
+      pointer-events:none;
+    }
+
+    /* Feedback */
+    .cw-cell.ok{
+      background: rgba(170, 255, 190, .65);
+      border-color: rgba(90, 200, 120, .45);
+      box-shadow: 0 0 0 6px rgba(90,200,120,.12), 0 14px 35px rgba(0,0,0,.10);
+    }
+
+    .cw-cell.bad{
+      background: rgba(255, 160, 160, .70);
+      border-color: rgba(255, 70, 70, .40);
+      box-shadow: 0 0 0 6px rgba(255,70,70,.12), 0 14px 35px rgba(0,0,0,.10);
+      animation: cwShake .18s ease-in-out 0s 2;
+    }
+
+    @keyframes cwShake{
+      0%{ transform: translateX(0) }
+      50%{ transform: translateX(-2px) }
+      100%{ transform: translateX(2px) }
+    }
+
+    .cw-footer-tip{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .cw-progress{
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .cw-clues{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      .cw-cell{ width: 38px; height: 38px; border-radius: 9px; }
+      .cw-cell input{ font-size: 16px; }
+    }
+  </style>
+</head>
+
+<body class="val-bg-design crossword-page">
+  <div class="hearts"></div>
+
+  <!-- Your same topbar (keep as is) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink active">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="dashboard.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="crossword-main">
+    <section class="card crossword-card">
+      <div class="cw-head">
+        <div>
+          <h2 class="cw-title">Crossword Game 🧩</h2>
+          <p class="cw-sub">
+            Type letters in the boxes. When a word is complete:
+            <b>correct turns green</b>, <b>wrong turns red and clears</b>.
+          </p>
+        </div>
+
+        <div class="cw-actions">
+          <button class="btn" id="cwCheckAll">✅ Check all</button>
+          <button class="btn" id="cwReset">🔄 Reset</button>
+          <span class="badge cw-progress" id="cwProgress">Solved 0 / 12</span>
+        </div>
+      </div>
+
+      <!-- Clues (TOP) -->
+      <div class="cw-panels">
+        <div class="cw-panel">
+          <h3>Clues</h3>
+          <div class="cw-clues">
+            <div>
+              <b>Across</b>
+              <ul id="acrossList"></ul>
+            </div>
+            <div>
+              <b>Down</b>
+              <ul id="downList"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid (BOTTOM) -->
+      <div class="cw-stage">
+        <div class="cw-grid" id="cwGrid" aria-label="Crossword grid"></div>
+
+        <div class="cw-footer-tip">
+          <span class="badge">Click a box → type. Auto-moves forward.</span>
+          <span class="badge">Wrong clears only that word.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script>
+    /**************************************************************
+     * YOUR 12 QUESTIONS + ANSWERS
+     * (No hints/options shown. Just clues.)
+     **************************************************************/
+    const QA = [
+      { num: 1, dir: "across", q: "Which month did we go on our first dinner date?", a: "DECEMBER" },
+      { num: 2, dir: "across", q: "What is our comfort food?", a: "BIRIYANI" },
+      { num: 3, dir: "across", q: "What colour were we wearing during first temple date?", a: "BLACK" },
+      { num: 4, dir: "across", q: "Who’s concert we attended together for the first time?", a: "ANIRUDH" },
+      { num: 5, dir: "across", q: "Where did we had our first kiss officially?", a: "IOIMALL" },
+      { num: 6, dir: "across", q: "Whats my favourite car brand?", a: "ROLLSROYCE" },
+      { num: 12, dir: "across", q: "What’s our combined name would be?", a: "RIINA" },
+
+      { num: 7, dir: "down", q: "Name my favourite football player of all time.", a: "STEVENGERRARD" },
+      { num: 8, dir: "down", q: "Our favourite sushi spot", a: "SHINZUSHI" },
+      { num: 9, dir: "down", q: "What movie we watched in Indulge?", a: "AVATAR" },
+      { num: 10, dir: "down", q: "What was the first drink I made for you?", a: "CHOCOLATE" },
+      { num: 11, dir: "down", q: "What’s my funny nickname you like?", a: "MERSALARASAN" },
+    ];
+
+    /**************************************************************
+     * BOARD PLACEMENT (15x15) — FIXED TO AVOID OVERLAP CONFLICTS
+     * This is why your “overlap causing wrong answer” issue is gone.
+     **************************************************************/
+    const SIZE = 15;
+
+    // placements are 0-based row/col
+    const WORDS = [
+      // Across
+      { num: 1, dir: "across", r: 1,  c: 1,  answer: "DECEMBER" },
+      { num: 2, dir: "across", r: 3,  c: 1,  answer: "BIRIYANI" },
+      { num: 3, dir: "across", r: 5,  c: 1,  answer: "BLACK" },
+      { num: 4, dir: "across", r: 7,  c: 1,  answer: "ANIRUDH" },
+      { num: 5, dir: "across", r: 9,  c: 1,  answer: "IOIMALL" },
+      { num: 6, dir: "across", r: 11, c: 1,  answer: "ROLLSROYCE" },
+      { num: 12,dir: "across", r: 13, c: 1,  answer: "RIINA" },
+
+      // Down (placed in far-right columns to avoid clashes)
+      { num: 11,dir: "down",  r: 0,  c: 11, answer: "MERSALARASAN" },
+      { num: 8, dir: "down",  r: 0,  c: 12, answer: "SHINZUSHI" },
+      { num: 10,dir: "down",  r: 0,  c: 13, answer: "CHOCOLATE" },
+      { num: 9, dir: "down",  r: 9,  c: 13, answer: "AVATAR" },          // starts lower so it doesn't collide with CHOCOLATE
+      { num: 7, dir: "down",  r: 0,  c: 14, answer: "STEVENGERRARD" },
+    ];
+
+    // Link QA text into WORDS for clue rendering
+    const clueByNum = new Map(QA.map(x => [x.num, x.q]));
+    const answerByNum = new Map(QA.map(x => [x.num, x.a.replace(/\s+/g,"").toUpperCase()]));
+
+    /**************************************************************
+     * BUILD MASK + CELL MAP
+     **************************************************************/
+    const mask = Array.from({length: SIZE}, () => Array.from({length: SIZE}, ()=> false));
+
+    for(const w of WORDS){
+      const ans = w.answer.toUpperCase();
+      for(let i=0;i<ans.length;i++){
+        const rr = w.r + (w.dir === "down" ? i : 0);
+        const cc = w.c + (w.dir === "across" ? i : 0);
+        if(rr>=0 && rr<SIZE && cc>=0 && cc<SIZE) mask[rr][cc] = true;
+      }
+    }
+
+    const gridEl = document.getElementById("cwGrid");
+    gridEl.style.gridTemplateColumns = `repeat(${SIZE}, 44px)`;
+
+    const cellMap = new Map(); // "r,c" -> input
+    const cellDivMap = new Map(); // "r,c" -> div
+
+    function k(r,c){ return `${r},${c}`; }
+
+    gridEl.innerHTML = "";
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        const div = document.createElement("div");
+        div.className = "cw-cell" + (mask[r][c] ? "" : " block");
+
+        if(mask[r][c]){
+          const input = document.createElement("input");
+          input.maxLength = 1;
+          input.autocomplete = "off";
+          input.spellcheck = false;
+          input.inputMode = "text";
+          input.dataset.r = r;
+          input.dataset.c = c;
+          div.appendChild(input);
+
+          cellMap.set(k(r,c), input);
+          cellDivMap.set(k(r,c), div);
+        }
+
+        gridEl.appendChild(div);
+      }
+    }
+
+    /**************************************************************
+     * NUMBERS (start cells)
+     **************************************************************/
+    function addNumber(r,c,num){
+      const div = cellDivMap.get(k(r,c));
+      if(!div) return;
+      const tag = document.createElement("div");
+      tag.className = "cw-num";
+      tag.textContent = String(num);
+      div.appendChild(tag);
+    }
+    WORDS.forEach(w => addNumber(w.r, w.c, w.num));
+
+    /**************************************************************
+     * CLUES UI (TOP)
+     **************************************************************/
+    const acrossList = document.getElementById("acrossList");
+    const downList = document.getElementById("downList");
+
+    function addClue(listEl, num){
+      const li = document.createElement("li");
+      li.innerHTML = `<b>${num}.</b> ${clueByNum.get(num) || ""}`;
+      listEl.appendChild(li);
+    }
+
+    // Keep in nice order
+    const acrossNums = [1,2,3,4,5,6,12];
+    const downNums = [7,8,9,10,11];
+
+    acrossNums.forEach(n => addClue(acrossList, n));
+    downNums.forEach(n => addClue(downList, n));
+
+    /**************************************************************
+     * WORD CELL LISTS (for checking)
+     **************************************************************/
+    function cellsOfWord(w){
+      const cells = [];
+      const ans = w.answer.toUpperCase();
+      for(let i=0;i<ans.length;i++){
+        const rr = w.r + (w.dir === "down" ? i : 0);
+        const cc = w.c + (w.dir === "across" ? i : 0);
+        const input = cellMap.get(k(rr,cc));
+        if(!input) return [];
+        cells.push(input);
+      }
+      return cells;
+    }
+
+    const wordCells = WORDS.map(w => ({ w, cells: cellsOfWord(w) }));
+
+    function readWord(cells){
+      return cells.map(i => (i.value || "").toUpperCase()).join("");
+    }
+
+    function clearWord(cells){
+      cells.forEach(i => i.value = "");
+    }
+
+    function markCells(cells, cls){
+      cells.forEach(i => i.parentElement.classList.add(cls));
+    }
+    function unmarkCells(cells, cls){
+      cells.forEach(i => i.parentElement.classList.remove(cls));
+    }
+
+    function flashWrongAndClear(cells){
+      markCells(cells, "bad");
+      setTimeout(()=>{
+        unmarkCells(cells, "bad");
+        clearWord(cells);
+        cells[0]?.focus();
+      }, 380);
+    }
+
+    function markCorrect(cells){
+      markCells(cells, "ok");
+    }
+
+    function resetMarks(){
+      cellMap.forEach(input=>{
+        input.parentElement.classList.remove("ok","bad");
+      });
+    }
+
+    /**************************************************************
+     * SOLVE TRACKING
+     **************************************************************/
+    const progressEl = document.getElementById("cwProgress");
+
+    function solvedKey(num){ return `ammu_cw_solved_${num}`; }
+
+    function updateProgress(){
+      let solved = 0;
+      for(const w of WORDS){
+        if(localStorage.getItem(solvedKey(w.num)) === "true") solved++;
+      }
+      progressEl.textContent = `Solved ${solved} / 12`;
+    }
+
+    function setSolved(num, yes){
+      localStorage.setItem(solvedKey(num), yes ? "true" : "false");
+    }
+
+    // restore solved words (keep them green + filled)
+    function restoreSolved(){
+      for(const {w, cells} of wordCells){
+        if(localStorage.getItem(solvedKey(w.num)) === "true"){
+          const ans = w.answer.toUpperCase();
+          cells.forEach((cell,i)=> cell.value = ans[i]);
+          markCorrect(cells);
+        }
+      }
+      updateProgress();
+    }
+
+    /**************************************************************
+     * CHECKING LOGIC
+     **************************************************************/
+    function checkWordNow(w, cells){
+      if(!cells.length) return;
+
+      // don't re-check solved words (optional)
+      if(localStorage.getItem(solvedKey(w.num)) === "true") return;
+
+      // only check when fully filled
+      if(cells.some(i => !i.value)) return;
+
+      const typed = readWord(cells);
+      const correct = (w.answer || "").toUpperCase();
+
+      // clear old marks
+      unmarkCells(cells, "ok");
+      unmarkCells(cells, "bad");
+
+      if(typed === correct){
+        markCorrect(cells);
+        setSolved(w.num, true);
+        updateProgress();
+      } else {
+        // wrong: show red + clear ONLY this word
+        setSolved(w.num, false);
+        flashWrongAndClear(cells);
+      }
+    }
+
+    function checkAll(){
+      // only mark fully-filled words; do not clear on checkAll
+      wordCells.forEach(({w, cells})=>{
+        if(!cells.length) return;
+
+        // if solved, keep green
+        if(localStorage.getItem(solvedKey(w.num)) === "true"){
+          markCorrect(cells);
+          return;
+        }
+
+        // only check if fully filled
+        if(cells.some(i => !i.value)) return;
+
+        unmarkCells(cells, "ok");
+        unmarkCells(cells, "bad");
+
+        const typed = readWord(cells);
+        const correct = (w.answer || "").toUpperCase();
+
+        if(typed === correct){
+          markCorrect(cells);
+          setSolved(w.num, true);
+        } else {
+          markCells(cells, "bad");
+          setTimeout(()=>unmarkCells(cells, "bad"), 350);
+          setSolved(w.num, false);
+        }
+      });
+
+      updateProgress();
+    }
+
+    /**************************************************************
+     * INPUT UX (auto-move across/down inside the SAME word)
+     **************************************************************/
+    // Map each cell -> its word object (no overlaps here by design)
+    const cellToWord = new Map(); // "r,c" -> {w, cells}
+    for(const wc of wordCells){
+      wc.cells.forEach(inp=>{
+        cellToWord.set(k(+inp.dataset.r, +inp.dataset.c), wc);
+      });
+    }
+
+    // next/prev within the same word
+    function nextInWord(input){
+      const wc = cellToWord.get(k(+input.dataset.r, +input.dataset.c));
+      if(!wc) return null;
+      const idx = wc.cells.indexOf(input);
+      return wc.cells[idx+1] || null;
+    }
+    function prevInWord(input){
+      const wc = cellToWord.get(k(+input.dataset.r, +input.dataset.c));
+      if(!wc) return null;
+      const idx = wc.cells.indexOf(input);
+      return wc.cells[idx-1] || null;
+    }
+
+    cellMap.forEach((input)=>{
+      input.addEventListener("input", ()=>{
+        input.value = (input.value || "").toUpperCase().replace(/[^A-Z]/g,"");
+
+        if(input.value){
+          const n = nextInWord(input);
+          if(n) n.focus();
+        }
+
+        const wc = cellToWord.get(k(+input.dataset.r, +input.dataset.c));
+        if(wc) checkWordNow(wc.w, wc.cells);
+      });
+
+      input.addEventListener("keydown", (e)=>{
+        if(e.key === "Backspace" && !input.value){
+          const p = prevInWord(input);
+          if(p){
+            p.focus();
+            p.value = "";
+            e.preventDefault();
+          }
+        }
+      });
+    });
+
+    /**************************************************************
+     * BUTTONS
+     **************************************************************/
+    document.getElementById("cwCheckAll").addEventListener("click", checkAll);
+
+    document.getElementById("cwReset").addEventListener("click", ()=>{
+      resetMarks();
+      cellMap.forEach(i => i.value = "");
+      for(const w of WORDS) localStorage.removeItem(solvedKey(w.num));
+      updateProgress();
+
+      // focus first playable
+      const first = cellMap.values().next().value;
+      first?.focus();
+    });
+
+    // init
+    updateProgress();
+    restoreSolved();
+  </script>
+</body>
+</html>

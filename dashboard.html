@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard 💗</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design">
+  <!-- Floating Hearts -->
+  <div class="hearts"></div>
+
+  <!-- Professional Top Bar (same as index) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink active">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="index.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="dash-hero">
+    <section class="card dash-card">
+      <div class="dash-head">
+        <div>
+          <h2 class="dash-title">Welcome, Ammu 💞</h2>
+          <p class="dash-sub">Pick anything… each page is made with love.</p>
+        </div>
+
+        <div class="dash-badge">
+          <span class="dash-badge-icon">✨</span>
+          <div>
+            <div class="dash-badge-title">Tip</div>
+            <div class="dash-badge-text">Save “Final Surprise” for last 💘</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <a class="dash-tile" href="our-story.html">
+          <div class="dash-ic">📖</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Timeline</span>
+            <h3>Our Story</h3>
+            <small>Little moments that became everything.</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="gallery.html">
+          <div class="dash-ic">📸</div>
+          <div class="dash-meta">
+            <span class="dash-tag">30 Photos</span>
+            <h3>Gallery</h3>
+            <small>Polaroids, captions, and memories.</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="letter.html">
+          <div class="dash-ic">💌</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Envelope</span>
+            <h3>Letter</h3>
+            <small>Open slowly…</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="invitation.html">
+          <div class="dash-ic">🌹</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Date</span>
+            <h3>Invitation</h3>
+            <small>A cute plan waiting for you.</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="my-mistakes.html">
+          <div class="dash-ic">🥺</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Sincere</span>
+            <h3>My Mistakes</h3>
+            <small>Soft, honest, real.</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="promises.html">
+          <div class="dash-ic">🤞</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Forever</span>
+            <h3>Promises</h3>
+            <small>Things I choose every day.</small>
+          </div>
+        </a>
+
+        <a class="dash-tile" href="games.html">
+          <div class="dash-ic">🎮</div>
+          <div class="dash-meta">
+            <span class="dash-tag">Ammu Arcade</span>
+            <h3>Games</h3>
+            <small>Crossword + Find the Heart 💘</small>
+          </div>
+        </a>
+
+        <a class="dash-tile dash-locked locked" data-final-card href="final-surprise.html">
+          <div class="dash-ic">🎁</div>
+          <div class="dash-meta">
+            <span class="dash-tag">End</span>
+            <h3>Valentine End</h3>
+            <small data-final-msg>Complete Ammu Arcade 💘</small>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same style as index) -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initHearts, initPageFade, wireDashboardLocks } from "./js/main.js";
+    initPageFade();
+    initHearts();
+    wireDashboardLocks();
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invitation 🎬</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design invite-page">
+  <div class="hearts"></div>
+
+  <!-- Same topbar as index -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink active">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="dashboard.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="invite-main">
+    <section class="invite-intro card">
+      <h2 class="invite-title">Movie Night Invitation 🎟️</h2>
+      <p class="invite-sub">
+        Ammu… scroll down. Each poster is one vibe. Pick your favorite 💗
+      </p>
+      <div class="badge">Tip: Scroll / trackpad feels like a premium gallery ✨</div>
+    </section>
+
+    <!-- Scroll container: posters snap one-by-one -->
+    <section class="poster-scroll" aria-label="Movie posters">
+      <!-- Poster 1 -->
+      <article class="poster-slide">
+        <div class="poster-card">
+          <img class="poster-img" src="assets/images/movie1.png" alt="Poster 1" />
+          <div class="poster-info">
+            <div class="pill">🎬 Love Story Movie</div>
+            <h3>Aaromaley</h3>
+            <p>Love + lessons. A movie that feels like “us”.</p>
+            <div class="poster-actions">
+              <button class="btn btn-primary invite-btn">
+               🎬 Ready to Watch?
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      <!-- Poster 2 -->
+      <article class="poster-slide">
+        <div class="poster-card">
+          <img class="poster-img" src="assets/images/movie2.png" alt="Poster 2" />
+          <div class="poster-info">
+            <div class="pill">🎞️ Pan-India Movie</div>
+            <h3>Rajasaab</h3>
+            <p>Action, adventure, and a touch of romance. All in one cinematic experience.</p>
+            <div class="poster-actions">
+  <button class="btn btn-primary invite-btn">
+    🎬 Ready to Watch?
+  </button>
+</div>
+
+          </div>
+        </div>
+      </article>
+
+      <!-- Poster 3 -->
+      <article class="poster-slide">
+        <div class="poster-card">
+          <img class="poster-img" src="assets/images/movie3.png" alt="Poster 3" />
+          <div class="poster-info">
+            <div class="pill">🍿 Malayalam Thriller Movie</div>
+            <h3>Dominic and the Ladies Purse</h3>
+            <p>GVM First Malayalam movie? MUST WATCH!!!</p>
+            <div class="poster-actions">
+  <button class="btn btn-primary invite-btn">
+    🎬 Ready to Watch?
+  </button>
+</div>
+
+          </div>
+        </div>
+      </article>
+    </section>
+            <!-- Invitation Popup -->
+<div class="invite-modal" id="inviteModal" aria-hidden="true">
+  <div class="invite-box">
+    <h3>💘 Kidnap Notice</h3>
+    <p>
+      You clicked it… so I am kidnapping you  
+      as informed date and time 😌🎟️  
+      No escape. Just you and me.
+    </p>
+    <button class="btn btn-primary" id="closeInvite">
+      Okay Fine 😭🍿
+    </button>
+  </div>
+</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+<script type="module">
+  import { initHearts, initPageFade } from "./js/main.js";
+  initPageFade();
+  initHearts();
+</script>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const inviteBtns = document.querySelectorAll(".invite-btn");
+    const inviteModal = document.getElementById("inviteModal");
+    const closeInvite = document.getElementById("closeInvite");
+
+    function openInvite(){
+      inviteModal.classList.add("show");
+      inviteModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeInviteModal(){
+      inviteModal.classList.remove("show");
+      inviteModal.setAttribute("aria-hidden", "true");
+    }
+
+    inviteBtns.forEach(btn => btn.addEventListener("click", openInvite));
+    closeInvite.addEventListener("click", closeInviteModal);
+
+    inviteModal.addEventListener("click", (e) => {
+      if (e.target === inviteModal) closeInviteModal();
+    });
+  });
+</script>
+
+</body>
+</html>

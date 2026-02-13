@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hi Ammu ❤️</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design no-scroll">
+  <!-- Floating Hearts -->
+  <div class="hearts"></div>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink active">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="hero">
+    <section class="card landing-card">
+
+      <div class="landing-grid">
+        <!-- Left: Decorative big hearts -->
+        
+
+        <!-- Right: Text + Image on SAME LEVEL -->
+        <div class="welcome">
+
+          <!-- THIS is the row like your example -->
+          <div class="text-img-row">
+            <div class="welcome-text">
+              <div class="hero-header">
+                <h1 class="hero-title">
+                  My Valentine <span class="heart-emoji">❤️</span>
+                </h1>
+              </div>
+
+              <p class="welcome-sub">
+                I made this little website just for you.
+                Everything inside is filled with our memories, love, and a few surprises.
+              </p>
+
+              <div class="welcome-actions">
+                <button class="btn btn-primary" id="startBtn">✨ Start ✨</button>
+                <a class="btn" href="dashboard.html">Go to Dashboard</a>
+              </div>
+
+              <div class="badge" style="margin-top:12px;">
+                Tip: Start from anywhere you like 💌
+              </div>
+            </div>
+
+            <!-- Image aligned to same row -->
+            <img
+              src="assets/images/hero-love.jpg"
+              alt="Love"
+              class="hero-side-img"
+            />
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Popup Modal -->
+<div class="modal-backdrop" id="startModal" aria-hidden="true">
+  <div class="modal">
+    <div class="pill">💌 For Ammu</div>
+    <h3 style="margin-top:10px;">Everything you need is in the dashboard, love. ❤️</h3>
+    <p style="margin-top:6px;">
+      Start anywhere — Our Story, Gallery, Letter, Games… and save the End for last 💘
+    </p>
+    <div class="modal-row">
+      <button class="btn" id="closeStartModal">Close</button>
+      <a class="btn btn-primary" href="dashboard.html">Go to Dashboard →</a>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+<script>
+  const startBtn = document.getElementById("startBtn");
+  const modal = document.getElementById("startModal");
+  const closeBtn = document.getElementById("closeStartModal");
+
+  console.log("modal is:", modal);
+
+  startBtn.addEventListener("click", () => {
+    if(!modal){
+      alert("Modal not found! Check id='startModal'");
+      return;
+    }
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden","false");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden","true");
+  });
+
+  modal.addEventListener("click", (e) => {
+    if(e.target === modal){
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden","true");
+    }
+  });
+</script>
+
+
+
+
+</body>
+</html>

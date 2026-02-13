@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Story 💞</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design story-noscr">
+  <div class="hearts"></div>
+
+  <!-- Topbar -->
+  <header class="topbar story-topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink active">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="dashboard.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main fixed layout -->
+  <main class="story-main">
+    <section class="card story-card">
+      <div class="story-head">
+        <div>
+          <h2 class="story-title">Our Journey, Ammu 💞</h2>
+          <p class="story-sub">A little map of how “us” became my favorite place.</p>
+        </div>
+        <div class="story-chip">
+          <span class="chip-dot"></span>
+          <span>Follow the road ↓</span>
+        </div>
+      </div>
+
+      <!-- MAP STAGE -->
+      <div class="story-stage" id="journeyMap">
+
+        <!-- Road -->
+        <svg class="story-road" viewBox="0 0 1000 520" aria-hidden="true">
+          <path class="road-shadow"
+            d="M80,90
+               C220,30 320,40 430,95
+               C540,150 610,145 720,120
+               C860,90 930,165 820,230
+               C700,310 560,280 460,250
+               C330,210 220,260 260,340
+               C310,450 520,470 650,420
+               C780,370 860,420 920,470" />
+          <path class="road"
+            d="M80,90
+               C220,30 320,40 430,95
+               C540,150 610,145 720,120
+               C860,90 930,165 820,230
+               C700,310 560,280 460,250
+               C330,210 220,260 260,340
+               C310,450 520,470 650,420
+               C780,370 860,420 920,470" />
+          <path class="road-dash"
+            d="M80,90
+               C220,30 320,40 430,95
+               C540,150 610,145 720,120
+               C860,90 930,165 820,230
+               C700,310 560,280 460,250
+               C330,210 220,260 260,340
+               C310,450 520,470 650,420
+               C780,370 860,420 920,470" />
+        </svg>
+
+        <!-- PINS (click highlights card) -->
+        <button class="pin p1" type="button" data-focus="f1" aria-label="First Dinner Date">
+          <span class="pin-dot"></span><span class="pin-label">🍽️</span>
+        </button>
+        <button class="pin p2" type="button" data-focus="f2" aria-label="Temple Date">
+          <span class="pin-dot"></span><span class="pin-label">🛕</span>
+        </button>
+        <button class="pin p3" type="button" data-focus="f3" aria-label="First Concert">
+          <span class="pin-dot"></span><span class="pin-label">🎤</span>
+        </button>
+        <button class="pin p4" type="button" data-focus="f4" aria-label="First Kiss">
+          <span class="pin-dot"></span><span class="pin-label">💋</span>
+        </button>
+        <button class="pin p5" type="button" data-focus="f5" aria-label="Comfort Food">
+          <span class="pin-dot"></span><span class="pin-label">🍛</span>
+        </button>
+        <button class="pin p6" type="button" data-focus="f6" aria-label="Movie Night">
+          <span class="pin-dot"></span><span class="pin-label">🎬</span>
+        </button>
+        <button class="pin p7 pin-final" type="button" data-focus="f7" aria-label="Forever Ongoing">
+          <span class="pin-dot"></span><span class="pin-label">✨</span>
+        </button>
+
+        <!-- PHOTO FRAMES (clean, consistent, non-overlapping) -->
+        <article class="story-cardlet f1">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 1</span>
+            <span class="cardlet-emoji">🍽️</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f1.JPG" alt="f1">
+          <div class="cardlet-body">
+            <h3>First Date at Pavillion Bukit Jalil</h3>
+            <p>December, the start of “us”.</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f2">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 2</span>
+            <span class="cardlet-emoji">🛕</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f2.JPG" alt="f2">
+          <div class="cardlet-body">
+            <h3>Temple Date</h3>
+            <p>Black traditional Outfit and US ✨</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f3">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 3</span>
+            <span class="cardlet-emoji">🎤</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f3.JPG" alt="f3">
+          <div class="cardlet-body">
+            <h3>Your birthday</h3>
+            <p>A day I realised how much I adore you.</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f4">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 4</span>
+            <span class="cardlet-emoji">💋</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f4.jpg" alt="f4">
+          <div class="cardlet-body">
+            <h3>Our First Event Together</h3>
+            <p>NP is our hardwork, we made it!.</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f5">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 5</span>
+            <span class="cardlet-emoji">🍛</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f5.JPG" alt="f5">
+          <div class="cardlet-body">
+            <h3>Deepavali Open House</h3>
+            <p>You + Me = home.</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f6">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 6</span>
+            <span class="cardlet-emoji">🎬</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f6.JPG" alt="f6">
+          <div class="cardlet-body">
+            <h3>Surprise Visit</h3>
+            <p>Made my time to meet you whenever I miss you.</p>
+          </div>
+        </article>
+
+        <article class="story-cardlet f7 final">
+          <div class="cardlet-top">
+            <span class="cardlet-tag">Chapter 7</span>
+            <span class="cardlet-emoji">✨</span>
+          </div>
+          <img class="cardlet-img" src="assets/images/f7.jpg" alt="f7">
+          <div class="cardlet-body">
+            <h3>Senara Hills Stay</h3>
+            <p>Changed my life meaningful, Anniversary Celebration 💞</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer story-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initHearts, initPageFade } from "./js/main.js";
+    import { initJourneyPins } from "./js/story-map.js";
+    initPageFade();
+    initHearts();
+    initJourneyPins();
+  </script>
+</body>
+</html>

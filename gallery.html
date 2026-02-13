@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery 📸</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="val-bg-design gallery-page">
+  <div class="hearts"></div>
+
+  <!-- Same topbar as index -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-badge">💘</span>
+        <span class="logo-text">Ammu Valentine</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="index.html" class="navlink active">Home</a>
+        <a href="dashboard.html" class="navlink">Dashboard</a>
+        <a href="our-story.html" class="navlink">Our Story</a>
+        <a href="gallery.html" class="navlink">Gallery</a>
+        <a href="letter.html" class="navlink">Letter</a>
+        <a href="invitation.html" class="navlink">Invitation</a>
+        <a href="my-mistakes.html" class="navlink">My Mistakes</a>
+        <a href="promises.html" class="navlink">Promises</a>
+        <a href="games.html" class="navlink">Games</a>
+        <a href="final-surprise.html" class="navlink">End</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <a class="btn" href="dashboard.html">← Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="gallery-main">
+    <section class="card gallery-card">
+      <div class="gallery-head">
+        <div>
+          <h2 class="gallery-title">Our Gallery 💗</h2>
+          <p class="gallery-sub">32 photos. Infinite feelings.</p>
+        </div>
+
+        <div class="gallery-tools">
+          <span class="badge">Click any photo to open ✨</span>
+        </div>
+      </div>
+
+      <div class="album-frame">
+  <div class="album-mat">
+
+    <!-- 30 photos, 4 per row -->
+    <div class="grid-4">
+      <img src="assets/images/gallery/01.jpg" alt="Photo 01" class="photo-img">
+      <img src="assets/images/gallery/02.jpg" alt="Photo 02" class="photo-img">
+      <img src="assets/images/gallery/03.jpg" alt="Photo 03" class="photo-img">
+      <img src="assets/images/gallery/04.jpg" alt="Photo 04" class="photo-img">
+
+      <img src="assets/images/gallery/05.jpg" alt="Photo 05" class="photo-img">
+      <img src="assets/images/gallery/06.jpg" alt="Photo 06" class="photo-img">
+      <img src="assets/images/gallery/07.jpg" alt="Photo 07" class="photo-img">
+      <img src="assets/images/gallery/08.jpg" alt="Photo 08" class="photo-img">
+
+      <img src="assets/images/gallery/09.jpg" alt="Photo 09" class="photo-img">
+      <img src="assets/images/gallery/10.jpg" alt="Photo 10" class="photo-img">
+      <img src="assets/images/gallery/11.jpg" alt="Photo 11" class="photo-img">
+      <img src="assets/images/gallery/12.jpg" alt="Photo 12" class="photo-img">
+
+      <img src="assets/images/gallery/13.jpg" alt="Photo 13" class="photo-img">
+      <img src="assets/images/gallery/14.jpg" alt="Photo 14" class="photo-img">
+      <img src="assets/images/gallery/15.jpg" alt="Photo 15" class="photo-img">
+      <img src="assets/images/gallery/16.jpg" alt="Photo 16" class="photo-img">
+
+      <img src="assets/images/gallery/17.jpg" alt="Photo 17" class="photo-img">
+      <img src="assets/images/gallery/18.jpg" alt="Photo 18" class="photo-img">
+      <img src="assets/images/gallery/19.jpg" alt="Photo 19" class="photo-img">
+      <img src="assets/images/gallery/20.jpg" alt="Photo 20" class="photo-img">
+
+      <img src="assets/images/gallery/21.jpg" alt="Photo 21" class="photo-img">
+      <img src="assets/images/gallery/22.jpg" alt="Photo 22" class="photo-img">
+      <img src="assets/images/gallery/23.jpg" alt="Photo 23" class="photo-img">
+      <img src="assets/images/gallery/24.jpg" alt="Photo 24" class="photo-img">
+
+      <img src="assets/images/gallery/25.jpg" alt="Photo 25" class="photo-img">
+      <img src="assets/images/gallery/26.jpg" alt="Photo 26" class="photo-img">
+      <img src="assets/images/gallery/27.jpg" alt="Photo 27" class="photo-img">
+      <img src="assets/images/gallery/28.jpg" alt="Photo 28" class="photo-img">
+
+      <img src="assets/images/gallery/29.jpg" alt="Photo 29" class="photo-img">
+      <img src="assets/images/gallery/30.jpg" alt="Photo 30" class="photo-img">
+      <img src="assets/images/gallery/31.jpg" alt="Photo 31" class="photo-img">
+      <img src="assets/images/gallery/32.jpg" alt="Photo 32" class="photo-img">
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      Created by: <b>Purush</b> © 2026
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initHearts, initPageFade } from "./js/main.js";
+    import { initGallery } from "./js/gallery.js";
+    initPageFade();
+    initHearts();
+    initGallery(); // gallery.js handles shuffle + lightbox
+  </script>
+</body>
+</html>
